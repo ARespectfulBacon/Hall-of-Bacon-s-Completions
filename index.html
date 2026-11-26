@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall of Completions</title>
+    <meta name="description" content="A personal log of my hardest gaming challenge completions.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/completion_style.css">
+    <script src="SCRIPTS/compleion_script.js" defer></script>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+        <h1 class="site-title">Hall of Completions</h1>
+        <p class="site-subtitle">My hardest gaming challenges, beaten and logged.</p>
+
+        <nav class="site-nav">
+            <a href="#completions" class="nav-link active">Completions</a>
+            <a href="#stats" class="nav-link">Stats</a>
+            <a href="#about" class="nav-link">About</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ===== QUICK STATS ===== -->
+        <section id="stats" class="stats-bar">
+            <!-- Values are calculated automatically by the script -->
+            <div class="stat-card">
+                <span class="stat-value" id="stat-count">–</span>
+                <span class="stat-label">Completions</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="stat-difficulty">–</span>
+                <span class="stat-label">Avg. Difficulty</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="stat-enjoyment">–</span>
+                <span class="stat-label">Avg. Enjoyment</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="stat-time">–</span>
+                <span class="stat-label">Total Time</span>
+            </div>
+        </section>
+
+        <!-- ===== COMPLETIONS LIST ===== -->
+        <section id="completions" class="completions">
+
+            <div class="table-toolbar">
+                <div class="toolbar-heading">
+                    <h2 class="section-title">Completions</h2>
+                    <span class="result-count" id="result-count"></span>
+                    <span class="local-badge" id="local-badge" hidden title="You've made changes in this browser that aren't in data/completions.json yet">local edits</span>
+                </div>
+
+                <div class="table-controls">
+                    <label for="search" class="visually-hidden">Search completions</label>
+                    <input type="search" id="search" class="search-input" placeholder="Search game or challenge...">
+
+                    <label for="sort" class="visually-hidden">Sort by</label>
+                    <select id="sort" class="sort-select">
+                        <option value="date">Sort: Date completed</option>
+                        <option value="difficulty">Sort: Difficulty</option>
+                        <option value="enjoyment">Sort: Enjoyment</option>
+                        <option value="time">Sort: Time spent</option>
+                        <option value="game">Sort: Game (A–Z)</option>
+                    </select>
+
+                    <button type="button" class="pill-btn" id="export-btn" title="Download completions.json to upload to the site">Export</button>
+                    <button type="button" class="pill-btn" id="import-btn" title="Load a completions.json file">Import</button>
+                    <button type="button" class="pill-btn pill-btn-warn" id="revert-btn" hidden title="Throw away this browser's edits and show the published list">Discard local edits</button>
+                    <input type="file" id="import-file" accept=".json,application/json" hidden>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="completions-table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col-rank">#</th>
+                            <th scope="col" class="col-game">Game</th>
+                            <th scope="col" class="col-challenge">Challenge</th>
+                            <th scope="col" class="col-difficulty">Difficulty</th>
+                            <th scope="col" class="col-enjoyment">Enjoyment</th>
+                            <th scope="col" class="col-time">Time Spent</th>
+                            <th scope="col" class="col-date">Completed</th>
+                            <th scope="col" class="col-proof">Proof</th>
+                            <th scope="col" class="col-notes">Notes</th>
+                            <th scope="col" class="col-actions"><span class="visually-hidden">Edit</span></th>
+                        </tr>
+                    </thead>
+
+                    <!-- Rows are generated by the script from your saved completions -->
+                    <tbody id="completions-body"></tbody>
+                </table>
+
+                <p class="empty-state" id="empty-state" hidden></p>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT ===== -->
+        <section id="about" class="about">
+            <h2 class="section-title">About</h2>
+            <p>
+                This is where I keep track of the toughest things I've beaten in games.
+                Difficulty and enjoyment are rated out of 10 and are entirely my own opinion.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Hall of Completions</p>
+    </footer>
+
+    <!-- ===== ADD BUTTON (bottom-right corner) ===== -->
+    <button type="button" class="fab" id="add-btn" aria-label="Add a completion" title="Add a completion">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 5v14M5 12h14" />
+        </svg>
+    </button>
+
+    <!-- ===== ADD / EDIT WINDOW ===== -->
+    <dialog class="modal" id="entry-modal" aria-labelledby="modal-title">
+        <form class="entry-form" id="entry-form" method="dialog" novalidate>
+            <header class="modal-header">
+                <h2 class="modal-title" id="modal-title">New completion</h2>
+                <button type="button" class="icon-btn" id="close-btn" aria-label="Close">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                </button>
+            </header>
+
+            <div class="form-grid">
+                <label class="field span-2">
+                    <span class="field-label">Game <span class="required">*</span></span>
+                    <input type="text" name="game" required maxlength="100" placeholder="e.g. My Favourite Platformer">
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Platform</span>
+                    <input type="text" name="platform" maxlength="30" placeholder="PC, PS5, Switch...">
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Date completed</span>
+                    <input type="date" name="date">
+                </label>
+
+                <label class="field span-2">
+                    <span class="field-label">Challenge <span class="required">*</span></span>
+                    <input type="text" name="challenge" required maxlength="150" placeholder="e.g. Deathless, max difficulty">
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Difficulty <output class="range-value" id="difficulty-out">5</output></span>
+                    <input type="range" name="difficulty" min="1" max="10" step="1" value="5" class="range range-pink">
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Enjoyment <output class="range-value" id="enjoyment-out">5</output></span>
+                    <input type="range" name="enjoyment" min="1" max="10" step="1" value="5" class="range range-purple">
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Tier</span>
+                    <select name="tier">
+                        <option value="auto">Auto (from difficulty)</option>
+                        <option value="extreme">Extreme</option>
+                        <option value="hard">Hard</option>
+                        <option value="medium">Medium</option>
+                    </select>
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Time spent (hours)</span>
+                    <input type="number" name="time" min="0" step="0.5" placeholder="0">
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Proof link</span>
+                    <input type="url" name="proofUrl" placeholder="https://...">
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Proof label</span>
+                    <input type="text" name="proofLabel" maxlength="20" placeholder="Video, Screenshot...">
+                </label>
+
+                <label class="field span-2">
+                    <span class="field-label">Notes</span>
+                    <textarea name="notes" rows="3" maxlength="300" placeholder="Anything worth remembering..."></textarea>
+                </label>
+            </div>
+
+            <p class="form-error" id="form-error" role="alert" hidden></p>
+
+            <footer class="modal-footer">
+                <button type="button" class="btn btn-danger" id="delete-btn" hidden>Delete</button>
+                <div class="modal-footer-right">
+                    <button type="button" class="btn btn-ghost" id="cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-btn">Save</button>
+                </div>
+            </footer>
+        </form>
+    </dialog>
+
+</body>
+</html>

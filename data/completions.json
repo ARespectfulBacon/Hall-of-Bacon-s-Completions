@@ -1,0 +1,67 @@
+[
+  {
+    "game": "Example Game One",
+    "platform": "PC",
+    "challenge": "Deathless, all bosses, max difficulty",
+    "difficulty": 10,
+    "enjoyment": 9,
+    "tier": "auto",
+    "time": 140,
+    "date": "2026-10-14",
+    "proofUrl": "",
+    "proofLabel": "Video",
+    "notes": "The final phase took 3 weeks on its own."
+  },
+  {
+    "game": "Example Game Two",
+    "platform": "PS5",
+    "challenge": "No-hit run, level 1",
+    "difficulty": 9,
+    "enjoyment": 8,
+    "tier": "auto",
+    "time": 95,
+    "date": "2026-07-02",
+    "proofUrl": "",
+    "proofLabel": "Video",
+    "notes": "Pure consistency grind."
+  },
+  {
+    "game": "Example Game Three",
+    "platform": "PC",
+    "challenge": "All golden collectibles",
+    "difficulty": 9,
+    "enjoyment": 10,
+    "tier": "auto",
+    "time": 80,
+    "date": "2026-03-21",
+    "proofUrl": "",
+    "proofLabel": "Screenshot",
+    "notes": "Favourite challenge so far."
+  },
+  {
+    "game": "Example Game Four",
+    "platform": "Switch",
+    "challenge": "Hardest mode, permadeath",
+    "difficulty": 8,
+    "enjoyment": 6,
+    "tier": "auto",
+    "time": 62,
+    "date": "2025-12-09",
+    "proofUrl": "",
+    "proofLabel": "",
+    "notes": "RNG-heavy, more frustrating than fun."
+  },
+  {
+    "game": "Example Game Five",
+    "platform": "PC",
+    "challenge": "100% achievements",
+    "difficulty": 7,
+    "enjoyment": 8,
+    "tier": "auto",
+    "time": 35,
+    "date": "2025-08-30",
+    "proofUrl": "",
+    "proofLabel": "Profile",
+    "notes": "Last achievement was the real wall."
+  }
+]
