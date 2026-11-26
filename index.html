@@ -7,11 +7,165 @@
     <meta name="description" content="A personal log of my hardest gaming challenge completions.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/completion_style.css">
     <script src="SCRIPTS/compleion_script.js" defer></script>
 </head>
 <body>
+
+    <!-- ===== BACKGROUND SCENE (sky + forest path to the house) ===== -->
+    <div class="backdrop" aria-hidden="true">
+        <div class="stars"></div>
+        <div class="moon"></div>
+
+        <svg class="scenery" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice">
+            <defs>
+                <!-- Cute rounded pine tree, coloured with currentColor -->
+                <symbol id="pine" viewBox="-8 -8 116 216">
+                    <g fill="currentColor" stroke="currentColor" stroke-width="12" stroke-linejoin="round">
+                        <path d="M50 0 L82 55 H18 Z" />
+                        <path d="M50 35 L92 105 H8 Z" />
+                        <path d="M50 80 L100 165 H0 Z" />
+                    </g>
+                    <rect x="42" y="160" width="16" height="40" rx="5" fill="currentColor" />
+                </symbol>
+
+                <!-- Fluffy bush -->
+                <symbol id="bush" viewBox="0 0 200 100">
+                    <g fill="currentColor">
+                        <circle cx="50" cy="65" r="40" />
+                        <circle cx="100" cy="50" r="50" />
+                        <circle cx="150" cy="65" r="40" />
+                        <rect x="10" y="65" width="180" height="35" />
+                    </g>
+                </symbol>
+
+                <radialGradient id="window-glow">
+                    <stop offset="0" stop-color="#ffe3a3" stop-opacity="0.75" />
+                    <stop offset="1" stop-color="#ffe3a3" stop-opacity="0" />
+                </radialGradient>
+
+                <linearGradient id="path-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#8a6cc0" />
+                    <stop offset="1" stop-color="#4a3878" />
+                </linearGradient>
+
+                <linearGradient id="fog-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#c9b6ff" stop-opacity="0" />
+                    <stop offset="1" stop-color="#ffb8de" stop-opacity="0.16" />
+                </linearGradient>
+            </defs>
+
+            <!-- Far hills -->
+            <path d="M0 238 C180 205 360 228 540 218 C660 212 700 206 720 206 C760 206 820 214 920 218 C1100 226 1260 200 1440 222 V360 H0 Z" fill="#40295f" />
+
+            <!-- Far tree line -->
+            <g style="color:#45387a">
+                <use href="#pine" x="20"   y="190" width="32" height="64" />
+                <use href="#pine" x="70"   y="182" width="36" height="72" />
+                <use href="#pine" x="128"  y="194" width="30" height="60" />
+                <use href="#pine" x="180"  y="184" width="36" height="72" />
+                <use href="#pine" x="240"  y="192" width="32" height="64" />
+                <use href="#pine" x="300"  y="180" width="38" height="76" />
+                <use href="#pine" x="362"  y="194" width="30" height="60" />
+                <use href="#pine" x="414"  y="186" width="34" height="68" />
+                <use href="#pine" x="470"  y="196" width="30" height="60" />
+                <use href="#pine" x="524"  y="188" width="34" height="68" />
+                <use href="#pine" x="584"  y="198" width="28" height="56" />
+                <use href="#pine" x="830"  y="198" width="28" height="56" />
+                <use href="#pine" x="880"  y="188" width="34" height="68" />
+                <use href="#pine" x="936"  y="194" width="30" height="60" />
+                <use href="#pine" x="990"  y="182" width="38" height="76" />
+                <use href="#pine" x="1052" y="192" width="32" height="64" />
+                <use href="#pine" x="1108" y="184" width="36" height="72" />
+                <use href="#pine" x="1170" y="194" width="30" height="60" />
+                <use href="#pine" x="1224" y="186" width="34" height="68" />
+                <use href="#pine" x="1284" y="196" width="30" height="60" />
+                <use href="#pine" x="1336" y="182" width="38" height="76" />
+                <use href="#pine" x="1398" y="192" width="32" height="64" />
+            </g>
+
+            <!-- Ground -->
+            <path d="M0 262 C300 250 560 258 720 256 C880 258 1140 250 1440 262 V360 H0 Z" fill="#2a2150" />
+
+            <!-- The house -->
+            <circle class="house-glow" cx="720" cy="236" r="78" fill="url(#window-glow)" />
+            <g class="house">
+                <rect x="742" y="194" width="10" height="22" rx="2" fill="#b89cf0" />
+                <path d="M674 224 L720 188 L766 224 Z" fill="#ff9ccf" stroke="#ff9ccf" stroke-width="8" stroke-linejoin="round" />
+                <rect x="684" y="220" width="72" height="40" rx="3" fill="#8a76c4" />
+                <circle class="window" cx="720" cy="210" r="5" fill="#ffe3a3" />
+                <rect class="window" x="692" y="230" width="14" height="12" rx="3" fill="#ffe3a3" />
+                <rect class="window" x="734" y="230" width="14" height="12" rx="3" fill="#ffe3a3" />
+                <path d="M713 260 V247 a7 7 0 0 1 14 0 V260 Z" fill="#4a3577" />
+                <circle cx="723" cy="253" r="1.3" fill="#ffe3a3" />
+            </g>
+
+            <!-- Winding path to the house -->
+            <path d="M711 260 L729 260 C750 290 810 325 900 360 L540 360 C640 330 700 295 711 260 Z" fill="url(#path-grad)" />
+            <g fill="#a68bf0" opacity="0.5">
+                <ellipse cx="720" cy="276" rx="7"  ry="2.5" />
+                <ellipse cx="714" cy="296" rx="12" ry="3.5" />
+                <ellipse cx="728" cy="320" rx="17" ry="4.5" />
+                <ellipse cx="712" cy="346" rx="23" ry="6" />
+            </g>
+
+            <!-- Mid trees -->
+            <use href="#pine" x="330"  y="150" width="70" height="140" style="color:#34508c" />
+            <use href="#pine" x="410"  y="162" width="62" height="124" style="color:#2b6670" />
+            <use href="#pine" x="486"  y="146" width="72" height="144" style="color:#6a3a8a" />
+            <use href="#pine" x="566"  y="176" width="56" height="112" style="color:#463f9a" />
+            <use href="#pine" x="818"  y="176" width="56" height="112" style="color:#463f9a" />
+            <use href="#pine" x="880"  y="146" width="72" height="144" style="color:#6a3a8a" />
+            <use href="#pine" x="960"  y="162" width="62" height="124" style="color:#2b6670" />
+            <use href="#pine" x="1036" y="150" width="70" height="140" style="color:#34508c" />
+
+            <!-- Mid bushes by the path -->
+            <use href="#bush" x="560"  y="270" width="110" height="55" style="color:#7a4a8e" />
+            <use href="#bush" x="780"  y="272" width="100" height="50" style="color:#3a6a7a" />
+
+            <!-- Fog -->
+            <rect x="0" y="230" width="1440" height="130" fill="url(#fog-grad)" />
+
+            <!-- Near trees (big, framing the scene) -->
+            <use href="#pine" x="-50"  y="70"  width="150" height="300" style="color:#1f1838" />
+            <use href="#pine" x="70"   y="110" width="130" height="260" style="color:#1c2c45" />
+            <use href="#pine" x="180"  y="60"  width="150" height="300" style="color:#261c47" />
+            <use href="#pine" x="270"  y="160" width="100" height="200" style="color:#1c2c45" />
+            <use href="#pine" x="1070" y="160" width="100" height="200" style="color:#1c2c45" />
+            <use href="#pine" x="1110" y="60"  width="150" height="300" style="color:#261c47" />
+            <use href="#pine" x="1240" y="110" width="130" height="260" style="color:#1c2c45" />
+            <use href="#pine" x="1340" y="70"  width="150" height="300" style="color:#1f1838" />
+
+            <!-- Near bushes -->
+            <use href="#bush" x="-30"  y="290" width="280" height="90" style="color:#221a40" />
+            <use href="#bush" x="320"  y="300" width="240" height="80" style="color:#2a1f4d" />
+            <use href="#bush" x="900"  y="300" width="240" height="80" style="color:#2a1f4d" />
+            <use href="#bush" x="1190" y="290" width="280" height="90" style="color:#221a40" />
+
+            <!-- Something watching from the bushes... -->
+            <g class="eyes eyes-1" fill="#ffb8de">
+                <ellipse cx="428" cy="330" rx="3.2" ry="3.6" />
+                <ellipse cx="442" cy="330" rx="3.2" ry="3.6" />
+            </g>
+            <g class="eyes eyes-2" fill="#c9b6ff">
+                <ellipse cx="1022" cy="328" rx="3" ry="3.4" />
+                <ellipse cx="1035" cy="328" rx="3" ry="3.4" />
+            </g>
+
+            <!-- Fireflies -->
+            <g fill="#fff1a8">
+                <circle class="firefly" cx="300"  cy="220" r="2.4" style="animation-delay:0s" />
+                <circle class="firefly" cx="560"  cy="190" r="2"   style="animation-delay:-1.5s" />
+                <circle class="firefly" cx="640"  cy="245" r="2.2" style="animation-delay:-3s" />
+                <circle class="firefly" cx="820"  cy="185" r="2"   style="animation-delay:-4.2s" />
+                <circle class="firefly" cx="880"  cy="235" r="2.4" style="animation-delay:-2.1s" />
+                <circle class="firefly" cx="1000" cy="280" r="2.2" style="animation-delay:-5.4s" />
+                <circle class="firefly" cx="1150" cy="205" r="2.4" style="animation-delay:-0.8s" />
+                <circle class="firefly" cx="455"  cy="270" r="2"   style="animation-delay:-6s" />
+            </g>
+        </svg>
+    </div>
 
     <!-- ===== HEADER ===== -->
     <header class="site-header">
